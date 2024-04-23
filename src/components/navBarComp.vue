@@ -1,5 +1,5 @@
 <template>
-  <nav class="">
+  <nav class=" top-0 z-50" v-auto-animate>
     <div class="flex h-[50px] border-b-[1px] border-neutral-3  items-end justify-between">
       <span>
         <router-link class="inline-block text-xl font-bold text-neutral-1" to="/"
@@ -7,23 +7,23 @@
         >
      
       </span>
-      <span class="flex hidden md:inline-block">
+      <span class="hidden md:flex">
         <router-link class="hidden font-bold text-md text-pretty md:inline-block hover:text-primary-3" to="/"
           >Home</router-link>
           <router-link class="hidden font-bold text-md text-pretty md:inline-block hover:text-primary-3" to="/about"
-          >about</router-link>
+          >About</router-link>
           <router-link class="hidden font-bold text-md text-pretty md:inline-block hover:text-primary-3" to="/community"
-          >community</router-link>
+          >Community</router-link>
           <router-link class="hidden font-bold text-md text-pretty md:inline-block hover:text-primary-3" to="/threads"
           >Threads</router-link>
           <router-link class="hidden font-bold text-md text-pretty md:inline-block hover:text-primary-3" to="/leaderboard"
           >Leaderboard</router-link>
       </span>
 
-      <span class="inline-block md:hidden">
+      <span class="inline-block md:hidden" v-auto-animate>
         <span
-          class="inline-block px-3 py-2 rounded-md text-light-1 bg-custom-1 hover:scale-105"
-          :class="navOpenCondition"
+          class="inline-block px-3 py-2 transition-all rounded-md text-light-1 bg-custom-1 hover:scale-105"
+          v-if="!navIsOpen"
           @click="toggleNav"
         >
           <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512">
@@ -35,8 +35,8 @@
           </svg>
         </span>
         <span
-          class="inline-block px-3 py-2 rounded-md cursor-pointer text-custom-1 bg-light-1 hover:scale-105"
-          :class="navCloseCondition"
+          class="inline-block px-3 py-2 transition-all rounded-md cursor-pointer text-custom-1 bg-light-1 hover:scale-105"
+          v-if="navIsOpen"
           @click="toggleNav"
         >
           <svg xmlns="http://www.w3.org/2000/svg" height="24" width="19" viewBox="0 0 384 512">
@@ -50,8 +50,20 @@
       </span>
     </div>
     <!-- mobile view -->
-    <div class="w-dmv">
-        
+    <div class="flex flex-col gap-2 mt-1 w-dmv md:hidden bg-neutral-1 "
+      v-if="navIsOpen">
+      <ul class="flex flex-col gap-2">
+        <li><router-link class="font-bold text-md text-pretty hover:bg-primary-3" to="/"
+          >Home</router-link></li>
+          <li><router-link class="font-bold text-md text-pretty hover:bg-primary-3 " to="/about"
+            >About</router-link></li>
+            <li><router-link class="font-bold text-md text-pretty hover:bg-primary-3 " to="/community"
+              >Community</router-link></li>
+              <li><router-link class="font-bold text-md text-pretty hover:bg-primary-3 " to="/threads"
+                >Threads</router-link></li>
+                <li><router-link class="font-bold text-md text-pretty hover:bg-primary-3 " to="/leaderboard"
+                  >Leaderboard</router-link></li>
+      </ul>
     </div>
   </nav>
 </template>
@@ -61,25 +73,11 @@ export default {
   data() {
     return {
       navIsOpen: false,
-      navIsClose: true
-    }
-  },
-  computed: {
-    navOpenCondition() {
-      return {
-        hidden: this.navIsOpen
-      }
-    },
-    navCloseCondition() {
-      return {
-        hidden: this.navIsClose
-      }
     }
   },
   methods: {
     toggleNav() {
       this.navIsOpen = !this.navIsOpen
-      this.navIsClose = !this.navIsClose
     }
   }
 }
@@ -102,5 +100,28 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+@media (max-width: 768px) {
+li a:first-of-type {
+  border: 0;
+}
+ li a.router-link-exact-active {
+color:#ffff;
+background-color: #D1CAFF; 
+
+}
+li a.router-link-exact-active:hover {
+background-color: #D1CAFF;
+color:#ffff;
+}
+li a{
+border-radius: 0.5rem;
+color:#ffff;
+padding: 0.5rem 1.5rem;
+width: 350px;
+transition: all 0.5s linear;
+
+}
+
 }
 </style>

@@ -9,5 +9,8 @@ export default {
 </script>
 
 <template>
-  <navBarComp/>
+  <header>
+    <navBarComp/>
+  </header>
+  
 </template>
