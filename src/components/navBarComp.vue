@@ -1,5 +1,5 @@
 <template>
-  <nav class=" top-0 z-50" v-auto-animate>
+  <nav class="fixed top-0 z-50 md:min-w-[1024px] min-w-[350px] lg:min-w-[1440px]" v-auto-animate  >
     <div class="flex h-[50px] border-b-[1px] border-neutral-3  items-end justify-between">
       <span>
         <router-link class="inline-block text-xl font-bold text-neutral-1" to="/"
@@ -51,7 +51,7 @@
     </div>
     <!-- mobile view -->
     <div class="flex flex-col gap-2 mt-1 w-dmv md:hidden bg-neutral-1 "
-      v-if="navIsOpen">
+      v-if="navIsOpen" :class="{ 'overflow-hidden': navIsOpen }">
       <ul class="flex flex-col gap-2">
         <li><router-link class="font-bold text-md text-pretty hover:bg-primary-3" to="/"
           >Home</router-link></li>
